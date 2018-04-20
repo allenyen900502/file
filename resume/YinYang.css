@@ -1,0 +1,52 @@
+body{
+    background: slategrey;
+}
+#YinYang{
+    width: 200px;
+    height: 200px;    
+    background: black;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #ffffff 0%,#ffffff 50%,#000000 50%,#000000 100%);
+    position: relative; 
+    margin: 20px auto;   
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#YinYang::before{    
+    content:'';
+    width: 20px;
+    height: 20px;
+    border: 40px solid black;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: white;
+}
+#YinYang::after{
+    content:'';
+    width: 20px;
+    height: 20px;
+    border: 40px solid white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: black;
+}
+@keyframes slidein {
+    from {
+        transform: rotate(0deg);
+    }
+  
+    to {
+        transform: rotate(360deg);
+    }
+  }
+  p{
+      color: white;
+      text-align: center;
+  }
