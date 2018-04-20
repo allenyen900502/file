@@ -59,6 +59,7 @@ h1,h2,h3,h4,h5,h6{
   padding-top: 5px;
   padding-bottom: 5px;
   display: block;
+  transition-duration: 0.3s;
 }
 .topNavBar nav>ul>li>a:hover{
   border-bottom: 3px solid #e06567;
@@ -158,6 +159,7 @@ h1,h2,h3,h4,h5,h6{
   width: 40px;
   line-height: 30px;
   margin: 16px;
+  transition-duration: 0.3s;
   
 }
 .usercard > footer.media a:hover{
@@ -190,7 +192,8 @@ body >main .downloadresume{
   border-radius: 5px;
   margin: 30px;
   font-weight: bold;
-  color: #585e69;  
+  color: #585e69;
+  transition-duration: 0.3s;  
 }
 .selfintroduction{
   max-width: 940px;
@@ -198,7 +201,7 @@ body >main .downloadresume{
   margin-right: auto;
   line-height: 1.5em;
   font-size: 20px;
-  font-family: kaiti;
+  font-family: 'Times New Roman', Times, serif
 }
 section.skills,
 section.portfolio{
@@ -248,14 +251,57 @@ section.skills .progressbar .progress{
   border-radius: 10%;   
 }
 section.portfolio{
-  text-align: center;
-  margin-bottom: 100px;
+  text-align: center;  
 }
-section.portfolio > nav > ol{  
-  
+section.portfolio > nav > ol{
+  display: inline-block;
+  margin-top: 35px;
+}
+section.portfolio > nav{
+  display: inline-block;
+  vertical-align: top;
 }
 section.portfolio > nav > ol > li{  
   float: left;
-  
+  padding-left: 40px;
+  cursor: pointer;
+}
+section.portfolio > nav > ol > li:first-child{    
+  padding-left: 0px;
+}
+section.portfolio >nav .bar{   
+  height: 5px;
+  background: white;
+  border-radius: 2px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+section.portfolio >nav .bar .bar-inner{
+  height: 100%;
+  background: #e8676b;
+  width: 10%;
+  border-radius: 2px;
+  transition-duration: 0.3s;
+}
+section.portfolio >nav .bar.state-1 .bar-inner{
+  margin-left: 0px;  
+  width: 35px;
+}
+section.portfolio >nav .bar.state-2 .bar-inner{
+  margin-left: 68px;  
+  width: 40px;
+}
+section.portfolio >nav .bar.state-3 .bar-inner{
+  margin-left: 145px; 
+  width: 105px;
+}
+section.portfolio .works{
+  position: relative;
+      
+}
+section.portfolio .works > .big,
+section.portfolio .works > .small{
+  position: absolute;
+  padding-bottom: 50px;  
 }
 

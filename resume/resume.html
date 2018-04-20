@@ -145,15 +145,35 @@
             <h2>作品集</h2>
             <nav>
                 <ol class="clearfix">
-                    <li>所有</li>
-                    <li>框架</li>
-                    <li>原生 JS &amp; CSS</li>
+                    <li id="portfolio1">所有</li>
+                    <li id="portfolio2">框架</li>
+                    <li id="portfolio3">原生 JS &amp; CSS</li>
                 </ol>
+                <div id="portfolioBar" class="bar state-1">                    
+                    <div class="bar-inner"></div>
+                </div>
+                <script>
+                    portfolio1.onclick=function(){
+                        portfolioBar.className="bar state-1"
+                    }
+                    portfolio2.onclick=function(){
+                        portfolioBar.className="bar state-2"
+                    }
+                    portfolio3.onclick=function(){
+                        portfolioBar.className="bar state-3"
+                    }
+                </script>
             </nav>
-            <div class="jobs">
-                <div class="big"></div>
-                <div class="small"></div>
-                <div class="small"></div>
+            <div class="works" style="height:576px;">
+                <div class="big" style="top:0px; left:0px;">
+                    <img src="./img/p1.jpg" alt="作品1">
+                </div>
+                <div class="small" style="top:0px; left:644px;">
+                        <img src="./img/p2.jpg" alt="作品2">
+                </div>                    
+                <div class="small" style="top:298px; left:644px;">
+                        <img src="./img/p3.jpg" alt="作品3">
+                </div>                            
             </div>
         </section>
                 
