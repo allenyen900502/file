@@ -1,0 +1,21 @@
+*{
+    margin: 0px;padding: 0px;
+}
+a{
+    text-decoration: none;
+}
+kbd{
+    border: 1px solid red;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    text-transform: uppercase;
+    margin: 2px;
+}
+#mainx{
+    display: inline-block;
+    text-align: center;
+}
+main{
+    text-align: center;
+}
