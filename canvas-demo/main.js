@@ -6,21 +6,20 @@ listenToMouse(yyy)
 
 
 var eraserEnabled = false
-eraser.onclick = function(){
-  eraserEnabled=true
-  actions.calssName='actions x'  
+eraser.onclick = function() {
+  eraserEnabled =true
+  actions.className = 'actions x'  
 }
 brush.onclick = function(){
-  eraserEnabled=false
-  actions.calssName='actions'  
+  eraserEnabled = false
+  actions.className = 'actions'
 }
 
 /******/ 
 function autoSetCanvassize(canvas){
   setCanvasSize()
   window.onresize = function() {
-  setCanvasSize()  
-
+  setCanvasSize() 
 }
 
 
