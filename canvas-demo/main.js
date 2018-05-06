@@ -1,87 +1,192 @@
+
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');
-
-autoSetCanvassize(yyy)
-listenToMouse(yyy)
+var lineWidth =5
+autoSetCanvasSize(yyy)
+listenToUser(yyy)
 
 
 var eraserEnabled = false
-eraser.onclick = function() {
-  eraserEnabled =true
-  actions.className = 'actions x'  
-}
-brush.onclick = function(){
-  eraserEnabled = false
-  actions.className = 'actions'
-}
-
-/******/ 
-function autoSetCanvassize(canvas){
-  setCanvasSize()
-  window.onresize = function() {
-  setCanvasSize() 
-}
-
-
-function setCanvasSize(){
-  var pageWidth = document.documentElement.clientWidth
-  var pageHeight = document.documentElement.clientHeight
-  canvas.width = pageWidth
-  canvas.height = pageHeight
-}
+  pen.onclick = function(){
+    eraserEnabled=false
+    pen.classList.add('active')
+    eraser.classList.remove('active')    
+  }
+  eraser.onclick = function(){
+    eraserEnabled=true
+    eraser.classList.add('active')
+    pen.classList.remove('active')
+  }
+//画笔颜色
+red.onclick = function(){
+  context.fillStyle ='red'
+  context.strokeStyle='red'
+  red.classList.add('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  black.classList.remove('active')
+  eraserEnabled=false  
+  pen.classList.add('active')
+  eraser.classList.remove('active')
 }  
-function drawcircle(x,y,radius){
+blue.onclick = function(){
+  context.fillStyle ='blue'
+  context.strokeStyle='blue'
+  blue.classList.add('active')
+  red.classList.remove('active')
+  green.classList.remove('active')
+  black.classList.remove('active')
+  eraserEnabled=false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+}
+green.onclick = function(){
+  context.fillStyle ='green'
+  context.strokeStyle='green'
+  green.classList.add('active')
+  blue.classList.remove('active')
+  red.classList.remove('active')
+  black.classList.remove('active')
+  eraserEnabled=false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+}
+black.onclick = function(){
+  context.fillStyle ='black'
+  context.strokeStyle='black'
+  black.classList.add('active')
+  blue.classList.remove('active')
+  red.classList.remove('active')
+  green.classList.remove('active')
+  eraserEnabled=false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+}
+
+thin.onclick = function(){
+  lineWidth=5
+}
+thick.onclick = function(){
+  lineWidth=10
+}
+clear.onclick = function(){
+  context.clearRect(0, 0, yyy.width, yyy.height);
+}
+download.onclick = function(){
+  
+  var url = yyy.toDataURL("image/png")
+  console.log(url)
+  var a = document.createElement('a')
+  document.body.appendChild(a)
+  a.href=url
+  a.download ="我的画"
+  a.target="_blank"
+  a.click()
+}
+/******/
+function autoSetCanvasSize(canvas){
+  setCanvasSize()
+  window.onresize = function (){
+    setCanvasSize()
+  }
+
+
+  function setCanvasSize() {
+    var pageWidth = document.documentElement.clientWidth
+    var pageHeight = document.documentElement.clientHeight
+    canvas.width = pageWidth
+    canvas.height = pageHeight
+  }
+}
+function drawcircle(x, y, radius) {
   context.beginPath();
-  context.fillstyle='balck';
-  context.arc(x,y,radius,0,Math.PI*2);
+  
+  context.arc(x, y, radius, 0, Math.PI * 2);
   context.fill()
 }
-function drawline(x1,y1,x2,y2){
+function drawline(x1, y1, x2, y2) {
   context.beginPath();
-  context.fillstyle='balck';
-  context.moveTo(x1,y1);
-  context.lineWidth=5;
-  context.lineTo(x2,y2);
+  
+  context.moveTo(x1, y1);
+  context.lineWidth = lineWidth;
+  context.lineTo(x2, y2);
   context.stroke();
   context.closePath()
 }
-  
-function listenToMouse(canvas){
-  var using =false
-  var lastpoint = {x: undefined,y: undefined};
+
+function listenToUser(canvas) {
+  var using = false
+  var lastpoint = { x: undefined, y: undefined };
+
+  //特性检测，检测设备是否支持Touch
+
+  if (document.body.ontouchstart !== undefined) {
+    canvas.ontouchstart = function (aaa) {
+      var x = aaa.touches[0].clientX;
+      var y = aaa.touches[0].clientY;
+      using = true
+      if (eraserEnabled) {
+        context.clearRect(x - 5, y - 5, 10, 10)
+      } else {
+        lastpoint = {
+          "x": x, "y": y
+        }
+      }
+    }
+    canvas.ontouchmove = function (aaa) {
+      var x = aaa.touches[0].clientX
+      var y = aaa.touches[0].clientY
+      if (!using) { return }
+      if (eraserEnabled) {
+        context.clearRect(x - 5, y - 5, 10, 10)
+      } else {
+        var newpoint = {
+          "x": x, "y": y
+        }
+        drawline(lastpoint.x, lastpoint.y, newpoint.x, newpoint.y)
+        lastpoint = newpoint
+      }
+    }
+    canvas.ontouchend = function (aaa) {
+      using = false
+    }
+  }
 
 
-canvas.onmousedown = function(aaa){  
-  var x =aaa.clientX;
-  var y =aaa.clientY; 
-  using =true
-  if(eraserEnabled){    
-    context.clearRect(x-5,y-5,10,10)
-  }else{    
-    lastpoint ={"x":x,"y":y
-    }    
-  } 
+  canvas.onmousedown = function (aaa) {
+    var x = aaa.clientX;
+    var y = aaa.clientY;
+    using = true
+    if (eraserEnabled) {
+      context.clearRect(x - 5, y - 5, 10, 10)
+    } else {
+      lastpoint = {
+        "x": x, "y": y
+      }
+    }
+  }
+
+  canvas.onmousemove = function (aaa) {
+    var x = aaa.clientX
+    var y = aaa.clientY
+
+    if (!using) { return }
+
+    if (eraserEnabled) {
+      context.clearRect(x - 5, y - 5, 10, 10)
+    } else {
+      var newpoint = {
+        "x": x, "y": y
+      }
+      drawline(lastpoint.x, lastpoint.y, newpoint.x, newpoint.y)
+      lastpoint = newpoint
+    }
+  }
+
+  canvas.onmouseup = function (aaa) {
+    using = false
+  }
 }
 
-canvas.onmousemove = function(aaa){
-  var x =aaa.clientX
-  var y =aaa.clientY
-  
-  if(!using) {return}
-  
-  if(eraserEnabled){    
-    context.clearRect(x-5,y-5,10,10)
-  }else{        
-    var newpoint ={"x":x,"y":y
-    }   
-      drawline(lastpoint.x,lastpoint.y,newpoint.x,newpoint.y)
-    lastpoint = newpoint
-   } 
-} 
-  
-canvas.onmouseup = function(aaa){
-  using= false
-}
-}
 
 
